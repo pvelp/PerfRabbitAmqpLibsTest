@@ -1,0 +1,1 @@
+java -jar perf-test-latest.jar -h amqp://rabbitmq:rabbitmq@localhost -y0 -p -u "read_queue" -s 1000 -C 1000000 --id "test-14" -f persistent
