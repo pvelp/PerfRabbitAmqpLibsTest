@@ -10,25 +10,19 @@ constexpr const int block_size = 1024;
 
 using namespace AmqpClient;
 
-void test_write(const Channel::ptr_t& ch){
-    for (int i = 1; i < 100000; i++){
-        auto message = BasicMessage::Create(std::to_string(i));
-        ch->BasicPublish("", READ_QUEUE, message, true, false);
-    }
-}
 
 int main(){
     Channel::OpenOpts opts;
     opts.auth = Channel::OpenOpts::BasicAuth("rabbitmq", "rabbitmq");
     opts.host = "localhost";
-    std::deque<std::string> messages(100000);
+    std::vector<std::string> messages;
+    
 
     boost::uint32_t message_count = 0;
     boost::uint32_t consumer_count = 0;
     uint32_t capacity;
 
     Envelope::ptr_t envelope;
-    std::string message_payload;
 
     try
     {
@@ -38,6 +32,7 @@ int main(){
 
         std::clog << "Message count: " << message_count << std::endl;
         capacity = message_count;
+        messages.reserve(message_count);
 
         std::string read_consumer_tag = channel->BasicConsume(READ_QUEUE, "", true, false, false);
         std::clog << "Consumer tag: " << read_consumer_tag << std::endl;
@@ -47,8 +42,7 @@ int main(){
         LOG_DURATION("READ 100 000 messages, size of 1 msg = 1kb")
         while (message_count != 0){
             envelope = channel->BasicConsumeMessage(read_consumer_tag);
-            message_payload = envelope->Message()->Body();
-            messages.push_back(message_payload);
+            messages.push_back(std::move(envelope->Message()->Body()));
             channel->BasicAck(envelope);
             message_count--;
         }
