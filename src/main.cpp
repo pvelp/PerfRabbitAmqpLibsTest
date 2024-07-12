@@ -51,7 +51,6 @@ int main(){
             messages.push_back(message_payload);
             channel->BasicAck(envelope);
             message_count--;
-            // std::clog << "[x] Current message_count = " << message_count << std::endl; 
         }
     }
         std::clog << "[x] Current message_count = " << message_count << std::endl;
