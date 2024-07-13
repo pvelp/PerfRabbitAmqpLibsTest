@@ -1,3 +1,9 @@
-[submodule "rabbitmq-perf-test"]
-	path = rabbitmq-perf-test
-	url = https://github.com/rabbitmq/rabbitmq-perf-test.git
+[submodule "common/rabbitmq-c"]
+	path = common/rabbitmq-c
+	url = https://github.com/alanxz/rabbitmq-c.git
+[submodule "common/SimpleAmqpClient"]
+	path = common/SimpleAmqpClient
+	url = https://github.com/alanxz/SimpleAmqpClient.git
+[submodule "argparser_morrisfranken"]
+	path = common/argparse
+	url = https://github.com/morrisfranken/argparse.git

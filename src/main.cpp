@@ -1,6 +1,7 @@
 #include <iostream>
 #include <deque>
 #include <exception>
+#include <argparse/argparse.hpp>
 #include <SimpleAmqpClient/SimpleAmqpClient.h>
 #include "profile.hpp"
 
