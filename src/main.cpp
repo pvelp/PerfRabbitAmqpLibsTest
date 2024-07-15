@@ -12,7 +12,7 @@ struct MyArgs : public argparse::Args{
     std::string& login = kwarg("l,login", "Login").set_default(std::string("rabbitmq"));
     std::string& pass = kwarg("p,password", "Password").set_default(std::string("rabbitmq"));
     std::string& read_queue_name = kwarg("o,output-queue", "Output (read) queue name").set_default(std::string("read_queue"));
-    std::string& write_queue_name = kwarg("i,input-queue", "Input (write) queue name").set_default(std::string("read_queue"));
+    std::string& write_queue_name = kwarg("i,input-queue", "Input (write) queue name").set_default(std::string("write_queue"));
     int& prefetch_message_count = kwarg("pc,prefetch-count", "Prefetch message count").set_default(1);
     int& message_capacity = kwarg("c,message-capacity", "Messages in queue to read").set_default(100000);
     int& message_size = kwarg("s,message-size", "Size for each message").set_default(5*1024);
@@ -27,16 +27,18 @@ int main(int argc, char* argv[]){
     Channel::OpenOpts opts;
     opts.auth = Channel::OpenOpts::BasicAuth(args.login, args.pass);
     opts.host = args.host;
+
     const std::string WRITE_QUEUE = args.write_queue_name;
     const std::string READ_QUEUE = args.read_queue_name;
+    
     const int message_size = args.message_size;
     const int message_capacity = args.message_capacity;
     const int prefetch_message_count = args.prefetch_message_count;
 
     std::vector<std::string> messages;
 
-    boost::uint32_t message_count = 0;
-    boost::uint32_t consumer_count = 0;
+    uint32_t message_count = 0;
+    uint32_t consumer_count = 0;
     uint32_t capacity;
 
     Envelope::ptr_t envelope;

@@ -23,4 +23,4 @@ RUN cp /usr/local/lib/libSimpleAmqpClient.so* bin/libs
 RUN cd /app && rm -rf build && mkdir build && cmake -B build . \
     && cmake --build build && cd /app/build
 
-CMD [./PerformanceTest]
+CMD ["./PerformanceTest"]
