@@ -13,10 +13,10 @@ struct MyArgs : public argparse::Args{
     std::string& pass = kwarg("p,password", "Password").set_default(std::string("rabbitmq"));
     std::string& read_queue_name = kwarg("o,output-queue", "Output (read) queue name").set_default(std::string("read_queue"));
     std::string& write_queue_name = kwarg("i,input-queue", "Input (write) queue name").set_default(std::string("write_queue"));
-    int& prefetch_message_count = kwarg("pc,prefetch-count", "Prefetch message count").set_default(1);
+    int& prefetch_message_count = kwarg("e,prefetch-count", "Prefetch message count").set_default(1);
     int& message_capacity = kwarg("c,message-capacity", "Messages in queue to read").set_default(100000);
     int& message_size = kwarg("s,message-size", "Size for each message").set_default(5*1024);
-    bool& test_type = flag("irw,immediately", "If used - start test: read message, write message, send ack");
+    bool& test_type = flag("f,immediately", "If used - start test: read message, write message, send ack");
 };
 
 
