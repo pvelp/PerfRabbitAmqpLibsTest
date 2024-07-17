@@ -20,3 +20,9 @@ services:
     labels:
       NAME: "rabbitmq"
 
+  # perf_test:
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   labels:
+  #     NAME: "performance test"
