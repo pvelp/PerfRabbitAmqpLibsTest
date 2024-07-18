@@ -33,7 +33,7 @@ done
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
-java -jar perf-test-latest.jar -h amqp://$login:$pass@$host -y0 -p -u $read_queue_name -s $size -C $capacity --id "perf_test" -f persistent
+java -jar perf-test-latest.jar -h amqp://$login:$pass@$host -y0 -p -u $read_queue_name --auto-delete false -s $size -C $capacity --id "perf_test" -f persistent
 
 perf_test_cmd="./build/PerformanceTest -h $host -l $login -p $pass -o $read_queue_name -i $write_queue_name -e $prefetch_message_count -c $capacity -s $size"
 

@@ -13,16 +13,16 @@ RUN apt update && apt upgrade -y \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13 --slave /usr/bin/g++ g++ /usr/bin/g++-13 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cd /performance_test/common/rabbitmq-c && rm -rf build && rm CMakeCache.txt && mkdir build \
+RUN cd /performance_test/common/rabbitmq-c && rm -rf build \
     && cmake -B build . && cmake --build build --target install \ 
     && cd /performance_test 
 
-RUN cd /performance_test/common/SimpleAmqpClient && rm -rf build && rm CMakeCache.txt && mkdir build \
+RUN cd /performance_test/common/SimpleAmqpClient && rm -rf build \
     && cmake -B build . && cmake --build build --target install \ 
     && cd /performance_test
 
 
-RUN cd /performance_test && rm -rf build && mkdir build && cmake -B build . \
+RUN cd /performance_test && rm -rf build && cmake -B build . \
     && cmake --build build && cd /performance_test
 
 WORKDIR /performance_test
