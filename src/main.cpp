@@ -1,8 +1,7 @@
 #include <deque>
 #include <argparse/argparse.hpp>
 #include "SimpleAmqpExecutor.hpp"
-
-
+#include "RabbitmqcExecutor.hpp"
 template <typename E>
 void test_rw(E executor){
     executor.test_rw();
@@ -15,7 +14,7 @@ void test_immediately_rw(E executor){
 
 int main(int argc, char* argv[]){
     auto args = argparse::parse<MyArgs>(argc, argv);
-    SimpleAmqpExecutor executor = SimpleAmqpExecutor(args);
+    RabbitmqcExecutor executor = RabbitmqcExecutor(args);
     bool is_connected = executor.connect();
     if (is_connected){
         if (args.test_type){

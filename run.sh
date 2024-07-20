@@ -1,8 +1,8 @@
 #!/bin/bash
 
 host="localhost"
-login="rabbitmq"
-pass="rabbitmq"
+login="guest"
+pass="guest"
 read_queue_name="read_queue"
 write_queue_name="write_queue"
 prefetch_message_count=1

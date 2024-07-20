@@ -1,3 +1,5 @@
+#pragma once
+
 #include <argparse/argparse.hpp>
 
 struct MyArgs : public argparse::Args{
