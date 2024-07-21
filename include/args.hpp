@@ -12,4 +12,5 @@ struct MyArgs : public argparse::Args{
     int& message_capacity = kwarg("c", "Messages in queue to read").set_default(100000);
     int& message_size = kwarg("s", "Size for each message").set_default(5*1024);
     bool& test_type = flag("f", "If used - start test: read message, write message, send ack");
+    bool& lib_type = flag("r", "If used - executor form Rabbitmq-c, else SimpleAmqpClient");
 };

@@ -3,7 +3,7 @@
 
 SimpleAmqpExecutor::SimpleAmqpExecutor(const MyArgs& args):
     WRITE_QUEUE(args.write_queue_name),
-    READ_QUEUE(args.write_queue_name),
+    READ_QUEUE(args.read_queue_name),
     message_size(args.message_size),
     capacity(args.message_capacity),
     message_count(0),
@@ -21,13 +21,12 @@ bool SimpleAmqpExecutor::connect() {
         channel = AmqpClient::Channel::Open(opts);
         channel->DeclareQueue(WRITE_QUEUE, false, true, false, false);
         channel->DeclareQueueWithCounts(READ_QUEUE, message_count, consumer_count, false, true, false, false);
-
+    
         std::clog << "Message count: " << message_count << std::endl;
         capacity = message_count;
         messages.reserve(message_count);
 
         read_consumer_tag = channel->BasicConsume(READ_QUEUE, "", true, false, false, prefetch_message_count);
-        std::clog << "Consumer tag: " << read_consumer_tag << std::endl;
         return true;
     }
     catch (const std::exception& error)

@@ -1,6 +1,6 @@
 #include <rabbitmq-c/amqp.h>
 #include <rabbitmq-c/tcp_socket.h>
-#include <amqp_framing.h>
+#include <rabbitmq-c/framing.h>
 #include "args.hpp"
 
 class RabbitmqcExecutor{
@@ -11,8 +11,8 @@ private:
     std::string login;
     
     char* exchange_read;
-    char* binding_key_read;
     char* exchange_write;
+    char* binding_key_read;
     char* binding_key_write;
 
     amqp_bytes_t write_queue;
@@ -32,6 +32,8 @@ private:
     amqp_socket_t *socket = NULL;
     amqp_rpc_reply_t res;
     amqp_envelope_t envelope;
+    amqp_basic_properties_t props;
+
 public:
     RabbitmqcExecutor(const MyArgs& args);
     bool connect();
