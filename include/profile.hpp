@@ -26,14 +26,16 @@ public:
         dur -= ms;
         auto us = duration_cast<microseconds>(dur);
         dur -= us;
-        auto ns = duration_cast<nanoseconds>(dur);
-        dur -= ns;
+
+        auto total = (s.count() * 1000000);
+        total += ms.count() * 1000;
+        total += us.count();
 
         cerr << message << "\n\t"
              << s.count() << " s "
              << ms.count() << " ms "
              << us.count() << " us "
-             << ns.count() << " ns "
+             << "total = " << total << " us "
              << endl;
     }
 

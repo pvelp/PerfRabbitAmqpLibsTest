@@ -1,7 +1,6 @@
 FROM ubuntu:22.04
 
 ARG IMAGE_VERSION="latest"
-RUN pwd && ls -a
 
 COPY . /performance_test
 
@@ -14,11 +13,11 @@ RUN apt update && apt upgrade -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN cd /performance_test/common/rabbitmq-c && rm -rf build \
-    && cmake -B build . && cmake --build build --target install \ 
+    && cmake -B build . && cmake --build build --target install \
     && cd /performance_test 
 
 RUN cd /performance_test/common/SimpleAmqpClient && rm -rf build \
-    && cmake -B build . && cmake --build build --target install \ 
+    && cmake -B build . && cmake --build build --target install \
     && cd /performance_test
 
 
