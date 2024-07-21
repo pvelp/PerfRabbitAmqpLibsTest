@@ -21,10 +21,7 @@ RabbitmqcExecutor::RabbitmqcExecutor(const MyArgs& args):
     read_queue = amqp_cstring_bytes(args.read_queue_name.c_str());
     props._flags = AMQP_BASIC_CONTENT_TYPE_FLAG |
                    AMQP_BASIC_DELIVERY_MODE_FLAG;
-                //    AMQP_BASIC_CORRELATION_ID_FLAG;
     props.delivery_mode = 2; /* persistent delivery mode */
-    // props.reply_to = write_queue;
-    // props.correlation_id = amqp_cstring_bytes("1");
 }
 
 
